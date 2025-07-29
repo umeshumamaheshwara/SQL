@@ -1,0 +1,168 @@
+PSEUDO COLUMN 
+   Pseudo columns are the false column that are present in each and every table and must be called explicitly.
+ 
+Pseudo columns cannot be seen without calling them.
+   We have 2 types:
+     1). ROWID
+     2). ROWNUM
+
+1). ROWID
+	ROWID IS AN 18 DIGIT ADDRESS IN WHICH THE RECORD IS PRESENT (OR) THE RECORD IS STORED IN THE MEMORY (VIRTUAL MEMEORY).
+
+
+ Note:
+ 	1. ROWID is one of the way to access or delete the record 
+ 	2. ROWID is unique.
+ 	3. ROWID is present for each and every record .
+ 	4. ROWID is generated at the time of insertion of records.
+ 	5. ROWID cannot be inserted, updated or deleted .
+ 	6. Empty table will not be having ROWID
+ 	7. ROWID is static in nature .
+ 	8. ROWID can be used to identify a record uniquely from the table when there is no key attribute or primary key
+
+	SYNTAX:
+
+ 		1. TO FETCH TOP RECORD  
+		SELECT */COLUMN_NAME/EXPRESSION
+ 		FROM EMP E1
+ 		WHERE ( SELECT COUNT([ DISTINCT] ROWID ) 
+		FROM EMP E2
+		WHERE E1.ROWID >= E2.ROWID) = N ;
+
+
+ 		2.TO FETCH BOTTOM RECORD
+ 		SELECT */COLUMN_NAME/EXPRESSION
+ 		FROM EMP E1
+ 		WHERE ( SELECT COUNT([ DISTINCT] ROWID ) 
+		FROM EMP E2
+ 		WHERE E1.ROWID< =E2.ROWID) = N ;
+
+
+	EXAMPLE:
+ 		SELECT ROWID,EMP.*
+                FROM EMP;
+
+ASSIGNMENT ON ROWID:
+
+	1). WAQTD FETCH THE FIRST RECORD FROM THE EMP TABLE
+    	ANS :   select *
+            	from emp e1
+            	where (select count(ROWID) from emp e2
+            	where e1.ROWID >= e2.ROWID) = 1 ;
+
+	2). WAQTD FETCH THE 2ND  RECORD FROM THE EMP TABLE
+   	ANS:    select *
+            	from emp e1
+            	where (select count(ROWID) from emp e2
+            	where e1.ROWID >= e2.ROWID) = 2 ;
+
+	3). WAQTD FETCH THE 4TH,5TH,8TH RECORD FROM THE EMP TABLE
+    	ANS:    select *
+            	from emp e1
+            	where (select count(ROWID) from emp e2
+            	where e1.ROWID >= e2.ROWID) IN (4,5,8) ;   
+
+	4). WAQTD FETCH THE LAST  RECORD FROM THE EMP TABLE
+    	ANS:    select *
+            	from emp e1
+            	where (select count(ROWID) from emp e2
+            	where e1.ROWID <= e2.ROWID) = 1 ; 
+
+	5). WAQTD FETCH THE SECOND LAST RECORD FROM THE EMP TABLE
+    	ANS:    select *
+            	from emp e1
+            	where (select count(ROWID) from emp e2
+            	where e1.ROWID <= e2.ROWID) = 2 ;
+
+
+2). ROWNUM
+ 	ROWNUM acts as serial number to the result table.
+
+ Note:
+ 	1.ROWNUM is used as record number that is assigned to the result table
+ 	2.ROWNUM is dynamic in nature.
+ 	3.ROWNUM is generated at the time of execution.
+ 	4.ROWNUM always starts with 1.
+ 	5.ROWNUM cannot be duplicated .
+ 	6.ROWNUM get incremented after it is assigned .
+
+ 	
+	Example:
+ 	  1. WAQTD ROWNUM ALONG WITH ALL THE DETAILS OF EMP.
+ 	  ANS:	SELECT ROWNUM, EMP.*
+ 		FROM EMP;
+         
+          2. WAQTD FIRST  3 RECORDS.
+          ANS:  SELECT *
+                FROM EMP
+                WHERE ROWNUM<4;
+
+
+
+TO MAKE ROWNUM AS STATIC:
+ 	1). Take a table and assign ROWNUM to a given table
+        2). Change the ROWNUM to any other name by using ALIAS 
+ 	3). Use this as a subquery in form clause of outer query
+ 	4). In the outer query use the alias name in the condition
+
+
+
+	Example:
+            1). WAQTD  THIRD 3 RECORD
+            ANS:  SELECT *
+ 		  FROM (SELECT ROWNUM SLNO,EMP.*
+ 		  FROM EMP)
+ 		  WHERE SLNO=3 ;
+
+
+
+ASSIGNMENT ON ROWNUM:
+	
+	1).  WAQTD THE FETCH FIRST RECORD FROM THE EMP TABLE.
+        ANS:   SELECT *
+               FROM (SELECT  ROWNUM  SLNO ,EMP.* FROM EMP) 
+               WHERE SLNO = 1 ;
+    
+        2).  WAQTD THE FETCH 2ND AND 3RD RECORD FROM THE EMP TABLE.
+        ANS:   SELECT *
+               FROM (SELECT  ROWNUM  SLNO ,EMP.* FROM EMP) 
+               WHERE SLNO IN (2,3) ;
+       
+        3).  WAQTD THE FETCH  7TH RECORD FROM THE EMP TABLE.
+        ANS:   SELECT *
+               FROM (SELECT  ROWNUM  SLNO ,EMP.* FROM EMP) 
+               WHERE SLNO = 7 ;
+
+        4).  WAQTD THE FETCH FIRST FIVE RECORDS FROM THE EMP TABLE. 
+        ANS:   SELECT *
+               FROM (SELECT  ROWNUM  SLNO ,EMP.* FROM EMP) 
+               WHERE SLNO <=5 ;
+
+        5).  WAQTD THE FETCH FIRST SEVEN RECORDS FROM THE EMP TABLE.
+        ANS:   SELECT *
+               FROM (SELECT  ROWNUM  SLNO ,EMP.* FROM EMP) 
+               WHERE SLNO <=7 ;
+                      
+    
+  
+
+
+
+
+
+    
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
