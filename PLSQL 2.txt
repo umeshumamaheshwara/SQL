@@ -1,0 +1,114 @@
+1). VARIABLE
+       It is used to store single value in to memory location.
+
+  syntax:- Variable_Name Data_type(size);
+
+  ex1:  Initializing the variable in Declare Block
+         
+	 DECLARE
+            NAME VARCHAR(25) := 'UMESH' ;
+         BEGIN
+            DBMS_OUTPUT.PUT_LINE(NAME);
+         END ;
+         / 
+
+  ex2 :  Initializing the variable in Begin Block 
+
+         DECLARE
+            NAME VARCHAR(25);
+         BEGIN
+            NAME := 'UMESH' ;
+            DBMS_OUTPUT.PUT_LINE(NAME);
+         END ;
+         / 
+  
+ ex3 :  Intializing the variable in Exception Block
+        
+        DECLARE
+          NAME VARCHAR2(25);
+        BEGIN
+           RAISE_APPLICATION_ERROR(-20001, 'Test error');
+        EXCEPTION
+           WHEN OTHERS THEN
+              NAME := 'UMESH';
+              DBMS_OUTPUT.PUT_LINE('In Exception Block: ' || NAME);
+        END;
+        /
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+>> INTO  :- INTO keyword is used in SELECT INTO statement in PL/SQL to assign vales from a query into variables.
+
+ex:  DECLARE
+       NAME VARCHAR(25);
+       E_JOB VARCHAR(25);
+       E_SAL NUMBER(10);
+     BEGIN
+       SELECT ENAME , JOB , SAL INTO NAME,E_JOB,E_SAL
+       FROM EMP
+       WHERE EMPNO=7499;
+       DBMS_OUTPUT.PUT_LINE(NAME||' ' || E_JOB || ' ' || E_SAL);
+     END;
+     /
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2).  Anchored Data Type
+       It  is used to assign the Data type for the  variable based on a database object.
+
+   Syntax : Variable_Name Type_Attribute%Type ;
+
+   ex:  DECLARE
+          NAME EMP.ENAME%TYPE;
+        BEGIN
+          SELECT ENAME INTO NAME
+          FROM EMP
+          WHERE EMPNO = 7499;
+          DBMS_OUTPUT.PUT_LINE(NAME);
+        END;
+        /
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------3). Constant :
+          constant is a user defined identifier whose value remains unchanged throught the program.
+     
+    Syntax : constat_name  CONSTANT  Data_Type(Size):=Value;
+
+    ex: DECLARE 
+           V_PI CONSTANT NUMBER(10,6) :=3.42;
+        BEGIN 
+           DBMS_OUTPUT.PUT_LINE(SALARY);
+        END; 
+        /
+
+    1. USING DEFAULT KEYWORD
+
+         DECLARE
+            V_PI CONSTANT NUMBER(10,6) DEFAULT 3.42;
+        BEGIN 
+           DBMS_OUTPUT.PUT_LINE(V_PI);
+        END; 
+        /
+
+    2. USING NOT NULL KEYWORD
+
+         DECLARE
+            V_PI CONSTANT NUMBER(10,6) NOT NULL DEFAULT  3.42;
+         BEGIN 
+           DBMS_OUTPUT.PUT_LINE(V_PI);
+         END; 
+         /
+
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+       
+           
+ 
+             
+          
+          
+
+
+
+
+    
+        
+             
