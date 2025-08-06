@@ -1,0 +1,39 @@
+IMPLICIT CURSOR
+-----------------
+Sql Statements Returns A Single Record Is Called Implicit Cursors .
+Implicit Cursor Are Simple Pl/Sql Programs Which Contains Select Into Clause Or Dml Statements
+
+
+EXAMPLE:
+
+DECLARE
+    V_NAME VARCHAR(20) ;
+    V_SAL NUMBER(6);
+BEGIN
+    SELECT ENAME ,SAL INTO V_NAME ,V_SAL
+    FROM EMP
+   WHERE EMPNO =&NO ;
+       DBMS_OUTPUT.PUT_LINE( V_NAME || '  ' ||V_SAL);
+END ;
+/
+
+
+O/P :
+
+ENTER VALUE FOR NO: 7369
+OLD   7:   WHERE EMPNO =&NO ;
+NEW   7:   WHERE EMPNO =7369 ;
+SMITH  800
+
+********************************************************
+
+
+EXAMPLE 2 :
+-----------
+
+BEGIN
+    UPDATE EMP
+    SET SAL= SAL+100
+    WHERE DEPTNO=20 ;
+END ;
+/
