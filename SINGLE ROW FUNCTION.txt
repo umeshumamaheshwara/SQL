@@ -1,0 +1,807 @@
+SINGLE ROW FUNCTION :
+    1.SINGLE ROW FUNCTIONS EXECUTE ROW BY ROW .
+    2.IT TAKES AN INPUT(RECORD) PROCESSES AND EXECUTES , AND THEN GENERATES AN OUTPUT.IF WE PASS n NUMBER OF INPUTS TO A SINGLE ROW FUNCTION IT          RETURNS n NUMBER OF OUTPUTS .
+   
+    
+     1.LENGTH( )
+     2.CONCAT( )
+     3.UPPER( )
+     4.LOWER( )
+     5.INITCAP( )
+     6.REVERSE( )
+     7.SUBSTR()
+     8.INSTR( )
+     9.REPLACE( )
+     10.MOD( )
+     11.TRUNC( )
+     12.ROUND( )
+     13.MONTHS_BETWEEN()
+     14.LAST_DAY()
+     15.TO_CHAR( )
+     16.NVL( )
+     17.NVL2( )
+     18.ASCII()
+     19.POWER()
+     20.SQRT()
+     21.SIN()
+     22.TAN()
+     23.RANK()
+     24.DENSE_RANK()
+     25.COALESCE()
+     26.NULLIF()
+     27.IFNULL()
+     28.CASE()
+     29.EXTRACT()
+     30.ADD_MONTHS()
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.LENGTH: "It is used to count the number of characters present In the given string".
+   SYNTAX: LENGTH ( 'string' )
+       
+   EX:1.  SELECT ENAME , LENGTH(ENAME)
+          FROM EMP;
+     
+      2. SELECT ENAME , LENGTH(ENAME)
+         FROM EMP
+         WHERE ENAME = 'SMITH' ;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.CONCAT( ) : "It is used to join the given two strings".
+  SYNTAX : CONCAT ( 'string1' , 'String2' )
+ 
+  EX:1.  SELECT CONCAT(' MR ', ENAME)
+         FROM EMP;
+     
+     2.  SELECT CONCAT(' MR ', ENAME)
+         FROM EMP
+         WHERE ENAME = 'SMITH' ;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+3.UPPER( ) : "It is used to convert a given string to upper case ".
+   SYNTAX: UPPER ( 'string' )
+
+  EX:1.  SELECT UPPER(ENAME)
+         FROM EMP;
+      
+     2.  SELECT UPPER(ENAME)
+         FROM EMP
+         WHERE ENAME = 'SMITH' ;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+4.LOWER( ) :"It is used to convert a given string to lower case ".
+   SYNTAX: LOWER( 'string' )
+ 
+ EX:1.  SELECT LOWER(ENAME)
+        FROM EMP;
+
+    2.  SELECT LOWER(ENAME)
+        FROM EMP
+        WHERE ENAME = 'SMITH' ;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+5.INITCAP( ):"It is used to convert a given string to initial capital letter case ".
+   SYNTAX: INITCAP( 'string' )
+
+ EX:1.  SELECT INITCAP(ENAME)
+        FROM EMP;
+    
+    2.  SELECT INITCAP(ENAME)
+        FROM EMP
+        WHERE ENAME = 'SMITH' ;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+6.REVERSE( ): "It is used to reverse a given string ".
+    SYNTAX: REVERSE( 'string' )
+  
+ EX:1.  SELECT REVERSE(ENAME)
+        FROM EMP;
+    
+    2.  SELECT REVERSE(ENAME)
+        FROM EMP
+        WHERE ENAME = 'SMITH' ;
+
+
+NOTE : WE CANT REVERSE A NUMBER USING REVERSE()
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+7.SUBSTR : "It is used to extract a part of string from the given Original string " .
+     SYNTAX: SUBSTR ( 'Original String' , Position, [  Length ] )
+
+ EX:1.  SELECT ENAME, SUBSTR(ENAME , 1, 3)
+        FROM EMP;
+
+    2.  SELECT ENAME, SUBSTR(ENAME, -1, 0)           
+        FROM EMP;
+
+
+1. NOTE: Length is not mandatory , If length is not mentioned then Consider the complete string .
+
+2. NOTE : SUBSTR ( 'Original String' , Position, [  Length ] ) -> LAST ARGUMENT WE CANT GIVE THE NEGATIVE VALUES BECAUSE IT IS LENGTH
+
+             -VE
+	       -7 -6  -5  -4  -3  -2   -1
+ 		Q  S   P   I   D   E    R
+                1  2   3   4   5   6    7
+             +VE
+ 
+         Example : SUBSTR( 'QSPIDER' , 2 , 3 )      SPI
+ 	 Example : SUBSTR( 'QSPIDER' , 3 , 3 )      PID
+ 	 Example : SUBSTR( 'QSPIDER' , 2 )          SPIDER
+ 	 Example : SUBSTR( 'QSPIDER' , 1 , 6 )      QSPIDE
+ 	 Example : SUBSTR( 'QSPIDER' , 4, 1)        I
+ 	 Example : SUBSTR( 'QSPIDER' , 1 , 1 )      Q
+ 	 Example : SUBSTR( 'QSPIDER' , 7 , 1)       R
+ 	 Example : SUBSTR( 'QSPIDER' , -1 )         R
+ 	 Example : SUBSTR( 'QSPIDER' , 6 )          ER
+ 	 Example : SUBSTR( 'QSPIDER' , 1 , 3 )      QSP
+ 	 Example : SUBSTR( 'QSPIDER' , 6 , 6 )      ER
+ 	 Example : SUBSTR( 'QSPIDER' , -2 , 1 )     E
+ 	 Example : SUBSTR( 'QSPIDER' , -5 , 3 )     PID
+ 	 Example : SUBSTR( 'QSPIDER' , -7 , 2 )     QS 
+
+	1.WAQTD extract first 3 characters of the emp names 
+      		SELECT SUBSTR(ENAME, 1, 3)
+      		FROM EMP;
+
+	2.WAQT extract last 3 characters of the employee names.
+      		SELECT SUBSTR(ENAME,-3)
+      		FROM EMP;
+
+	3.WAQTD to display first half of employee names .(50% OF NAME ).
+       		SELECT SUBSTR(ENAME,  1, LENGTH(ENAME)/2)
+       		FROM EMP;
+
+	4.WAQT to display second half of employee names .(50-100 OF ENAME).
+      		SELECT SUBSTR(ENAME, LENGTH(ENAME)/2+1)
+      		FROM EMP;
+
+        5.WAQTD NAMED OF THE EMPLOYEES IF THE NAME STARTS WITH 'A' , 'S' , 'T'.
+               SELECT ENAME
+               FROM EMP
+               WHERE ENAME LIKE 'A%' OR ENAME LIKE 'S%' OR ENAME LIKE 'T%' ;
+              
+
+	5.LIST THE NAMES OF THE EMPLOYEES IF THEIR NAME'S 3RD CHARACTER IS 'A' .
+               SELECT ENAME
+               FROM EMP
+               WHERE ENAME LIKE '__A%' ;
+
+	6.WAQTD THE NAMES LEAVING THE FIRST AND THE LAST CHARACTER.
+               SELECT ENAME, SUBSTR(ENAME, 2, LENGTH(ENAME)-2) 
+               FROM EMP;
+
+	7.WAQTD NAMES OF THE EMPLOYEES BY REVERSING THE SECOND HALF OF THE NAME. 
+	   ex: i/p SMITH --> o/p SMHTI
+              SELECT SUBSTR(ENAME,1,LENGTH(ENAME)/2) || REVERSE(SUBSTR(ENAME,LENGTH(ENAME)/2+1))
+              FROM EMP;
+ 
+
+	8.WAQTD NAMES OF THE EMPLOYEES BY REVERSING THE FIRST AND THE SECOND HALF .
+	    ex: i/p SMITH --> o/p MSHTI
+            SELECT REVERSE(SUBSTR(ENAME,1,LENGTH(ENAME)/2)) || SUBSTR(ENAME,LENGTH(ENAME)/2+1)
+            FROM EMP;
+
+  
+	9.WAQTD DETAILS OF THE EMPLOYEES IF A STRING 'MAN' IS PRESENT AS FIRST 3 CHARACTERS IN THEIR DESIGNATIONS.
+              SELECT *
+              FROM EMP
+              WHERE SUBSTR(JOB,1,3)='MAN' ;
+
+	10.WAQTD DETAILS OF THE EMPLOYEES IF A STRING 'MAN' IS PRESENT AS LAST 3 CHARACTERS IN THEIR DESIGNATIONS .
+             SELECT *
+             FROM EMP
+             WHERE SUBSTR(JOB,-3)='MAN' ; 
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+8.INSTR() :  It is used to obtain the position in which the string is present in the Original string.
+             It is used to search for a string in the Original string if present it returns the POSITION Else it returns 0.
+  
+     SYNTAX:  INSTR('ORIGINAL_STRING', 'STRING' , POSITION [, OCCURANCE]
+     
+Note : if occurrence is not Mentioned then , the default value of Occurrence is 1.
+    
+                     B A N A N A
+                     1 2 3 4 5 6
+
+
+      Example : INSTR( 'BANANA' , 'A' , 1 , 1 )   Pos:2
+      Example : INSTR( 'BANANA' , 'A' , 2 , 1 )   Pos:2
+      Example : INSTR( 'BANANA' , 'A' , 1 , 2 )   Pos:4
+      Example : INSTR( 'BANANA' , 'A' , 1 , 3 )   Pos:6
+      Example : INSTR( 'BANANA' , 'A' , 1 , 4 )   Pos:0
+      Example : INSTR( 'BANANA' , 'A' , 4 , 2 )   Pos:6
+      Example : INSTR( 'BANANA' , 'A' , 2 )       Pos:2
+      Example : INSTR( 'BANANA' , 'N' , 2 , 1)    Pos:3
+      Example : INSTR( 'BANANA' , 'O' , 1 ,1 )    Pos:0
+      Example : INSTR( 'BANANA' , 'NA' , 2 , 2 )  POS:5
+      Example : INSTR( 'BANANA' , 'A' , 3 , 3 )   POS:0
+      Example : INSTR( 'BANANA' , 'ANA' , 1 , 2 ) POS:4
+
+
+
+ASSIGNMENT:
+**********
+     
+1. WAQTD NAMES OF THE EMPLOYEE IF THE NAME CHAR 'A' PRESENT IN IT WITHOUT USING LIKE OPERATOR
+ANS:  SELECT ENAME 
+      FROM EMP 
+      WHERE INSTR(ENAME , 'A' , 1, 1) > 0 ;
+
+2. WAQTD DETAILS OF THE EMPLOYEE IF THE NAME HAS CHAR 'L' PRESENT ATLEAST 2 TIMES, WITHOUT USING LIKE OPERATOR.
+ANS:  SELECT * 
+      FROM EMP 
+      WHERE INSTR(ENAME , 'L' , 1, 2) > 0 ;
+
+3. WAQTD LIST OF EMPLOYEES WHO ARE WORKING IN A DESIGNATION THAT HAS A STRING 'MAN' IN IT .
+ANS:  SELECT * 
+      FROM EMP 
+      WHERE INSTR(JOB , 'MAN' , 1, 1) > 0 ;
+
+4. WAQTD NAMES OF THE EMPLOYEES IF THEIR NAME HAS CHAR 'S' PRESENT EXACTLY ONCE.
+ANS:  SELECT * 
+      FROM EMP 
+      WHERE INSTR(ENAME , 'S' , 1, 1) > 0 
+            AND INSTR(ENAME ,'S',1,2)=0;
+
+5. WAQTD NAMES OF THE EMPLOYEES IF THEIR NAME HAS CHAR 'R' PRESENT EXACTLY TWICE.
+ANS:  SELECT * 
+      FROM EMP 
+      WHERE INSTR(ENAME , 'R' , 1, 2) > 0  AND INSTR(ENAME ,'R',1,3)=0;
+
+
+6.WAQTD NAMES OF THE EMPLOYEES IF CHAR 'S' IS PRESENT IN THE NAME. 
+       SELECT ENAME
+       FROM EMP
+       WHERE INSTR(ENAME,'S',1) >0 ;
+
+
+8.WAQTD NAMES OF THE EMPLOYEES IF CHAR 'A' IS PRESENT ATLEST 2 TIMES IN THE NAME.
+       SELECT ENAME
+       FROM EMP
+       WHERE INSTR(ENAME,'A',1,2) > 0 ;
+
+9.WAQTD NAMES OF THE EMPLOYEES IF CHAR 'R' IS PRESENT ATLEST 3 TIMES IN THE NAME.
+       SELECT ENAME 
+       FROM EMP
+       WHERE INSTR(ENAME,'R',1,3) > 0 ;
+ 
+
+10.WAQTD NAMES OF THE EMPLOYEES IF STRING 'LL' IS PRESENT ATLEST ONCE TIMES IN THE NAME.
+       SELECT ENAME 
+       FROM EMP 
+       WHERE INSTR(ENAME,'LL',1) > 0;
+
+
+11.WAQTD NAMES OF THE EMPLOYEES IF CHAR 'A' IS PRESENT EXACTLY 2 TIMES IN THE NAME.
+       SELECT ENAME
+       FROM EMP
+       WHERE INSTR(ENAME,'A',1,2) > 0 AND INSTR(ENAME,'A',1,3) = 0 ;
+
+
+12.WAQTD NAMES OF THE EMPLOYEES IF CHAR 'A' IS PRESENT EXACTLY 4 TIMES IN THE NAME.
+       SELECT ENAME
+       FROM EMP
+       WHERE INSTR(ENAME,1,4) > 0 AND INSTR(ENAME, 1,5) = 0;
+       
+
+13.WAQTD DETAILS OF THE EMPLOYEES IF A STRING 'MAN' IS PRESENT IN THEIR DESIGNATIONS.
+       SELECT *
+       FROM EMP
+       WHERE INSTR(JOB,'MAN',1) > 0 OR INSTR(JOB,'MAN',1,2) > 0;
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+9.REPLACE ( ) : "It is used to replace a string with another string in The original string.
+      SYNTAX:REPLACE ( 'ORIGINAL_STRING' , 'STRING' , [ 'NEW_STRING' ] )
+
+   Example : REPLACE ( 'BANANA' , 'N' , 'ABC' )         BAABCAABCA
+   Example : REPLACE ( 'OPPO' , 'OPPO' , 'SAMSUNG' )    SAMSUNG
+   Example : REPLACE ( 'BANANA' , 'A' )                 BNN
+   Example : REPLACE ( 'ENGINEERING' , 'E' )            NGINRING
+   Example : REPLACE ( 'ENGINEERING' , 'E' , '123' )    123NGIN123123RING
+
+
+NOTE : if the third argument is not mentioned the default  Value of it is Null .
+
+  1.WAQTD the number of times char 'A' is present in BANANA !!!
+         SELECT LENGTH('BANANA') - LENGTH(REPLACE('BANANA','A')) FROM DUAL ;
+
+          6-3 =3 TIMES PRESENT
+
+ 
+  2. WAQTD to count number of time 'A' is present in 'MALAYALAM'.
+          SELECT LENGTH('MALAYALAM') - LENGTH(REPLACE('MALAYALAM','A')) FROM DUAL;
+
+  
+  3.WATQD NAMES OF ALL THE EMPLOYEES BY REPLACING 'A' WITH  A '$'.
+         SELECT ENAME, REPLACE(ENAME,'A','$') 
+         FROM EMP;
+
+ 
+  4.WAQTD NAMES OF THE EMPLOYEES IF CHAR 'A' IS PRESENT EXACTLY 2 TIMES IN THE NAME.
+         SELECT ENAME
+         FROM EMP
+         WHERE INSTR(ENAME,'A',1,2) > 0 AND INSTR(ENAME,'A',1,3) = 0 ;
+
+
+  5.WAQTD NAMES AND NUMBER OF TIMES CHAR 'A' PRESENT IN EACH NAME.
+         SELECT ENAME , LENGTH(ENAME)-LENGTH(REPLACE(ENAME,'A')) 
+         FROM EMP;
+
+
+  6.WAQTD NUMBER OF TIMES CHAR 'S' PRESENT IN QSPIDERS/JSPIDERS.
+         SELECT LENGTH('QSPIDERS') - LENGTH(REPLACE('QSPIDERS','S')) 
+         FROM DUAL;
+ 
+                  OR
+   
+         SELECT LENGTH('JSPIDERS') - LENGTH(REPLACE('JSPIDERS','S')) 
+         FROM DUAL;
+
+   
+        
+  7.WAQTD NUMBER OF TIMES CHAR 'S' PRESENT IN SUCCESS.
+         SELECT LENGTH('SUCCSS') - LENGTH(REPLACE('SUCCESS','S')) 
+         FROM DUAL;
+ 
+
+  8.WAQTD NUMBER OF TIMES CHAR 'E' PRESENT IN ENGINEERING. 
+         SELECT LENGTH('ENGINEERING') - LENGTH(REPLACE('ENGINEERING','E')) 
+         FROM DUAL;
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+10.MOD( ) : "It is used to obtain modulus/remainder of the given number "
+   Syntax: MOD ( m , n )
+  
+ EX:1.  SELECT MOD( 5 , 2 ) FROM DUAL ;    O/P = 1
+ 
+    2.  WAQTD ENAMES OF THE EMPLOYEES WHO EARN SALARY IN MULTIPLES OF 3
+             SELECT ENAME
+             FROM EMP
+             WHERE MOD(SAL,3)=0 ;
+    
+    3.  WAQTD DETAILS OF THE EMPLOYEE WHO HAVE ODD EID
+             SELECT *
+             FROM EMP
+             WHERE MOD(EMPNO,2)=1 ;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+11.ROUND( ) : this function is used to round of the given number to its nearest value.
+     Syntax: ROUND ( Number , [ Scale ])
+                               
+NOTE : The default value of scale is 0 
+    
+   Ex:1. ROUND (5.6)       	O/P = 6
+   EX:2. ROUND (5.5)       	O/P = 6
+   EX:3. ROUND (5.4)       	O/P = 5
+   EX:4. ROUND (9.9)       	O/P = 10
+   EX:5. ROUND (253.5, 1)       O/P = 254
+  
+  GIVING -VE VALUES 
+   
+   EX:1. ROUND (253.5248 ,-1)   O/P = 250              COMPARING WITH THE 10'S POSITION MEANS IT COMPARING WITH THE 3 SO IT IS LESS THAN 4
+   EX:2. ROUND (255.5248, -1)   O/P = 260
+   EX:3. ROUND (253.52 , -2)    O/P = 300              COMPARING WITH THE 100'S POSITION MEANS IT COMPARING WITH THE  5 SO IT IS GREATER THAN 4.
+   EX:4. ROUND (253.52 , -3)    0/P = 0 
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+12.TRUNC( ):"It is similar to ROUND() but it always rounds-off the given number to the lower value ".
+     SYNATX:TRUNC (NUMBER)
+ 
+     Example : TRUNC ( 5.6 ) 5
+     Example : TRUNC ( 5.5 ) 5
+     Example : TRUNC ( 5.4 ) 5
+     Example : TRUNC ( 9.9 ) 9
+     Example : TRUNC ( 9.4 ) 9
+     Example : TRUNC (8.6 )  8
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+NOTE :  DATE COMMANDS :
+           1. SYSDATE : " It is used to obtain Todays Date ".
+           2. CURRENT_DATE : " it is also used to obtain todays date ".
+           3. SYSTIMESTAMP : "It is used to obtain date , time and time zone ".
+
+
+EXAMPLE :  SELECT SYSDATE 
+           FROM DUAL ;               O/P = 14-AUG-25
+
+EXAMPLE :  SELECT CURRENT_DATE 
+           FROM DUAL;                O/P = 14-AUG-25
+
+EXAMPLE :  SELECT SYSTIMESTAMP        
+           FROM DUAL ;               14-AUG-25 05.33.35.973000 PM +05:30
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+13. MONTHS_BETWEEN( ):   "It is used to Obtain the number of months present  between the Given two dates ".
+       SYNTAX : MONTHS_BETWEEN(DATE1 ,DATE2)
+
+   EXAMPLE:   SELECT TRUNC( MONTHS_BETWEEN( SYSDATE , HIREDATE ) ) || ' Months' 
+              FROM EMP;
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+  
+ 14. LAST_DAY( ): " It is used to Obtain the last day in the particular of the given date".
+         SYNATX: LAST_DAY(DATE)
+
+  EXAMPLE:   SELECT LAST_DAY( SYSDATE )    
+             FROM DUAL ;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+15.  TO_CHAR( ) : "It is used to convert the given date into String format based on the Model given". 
+         SYNTAX :  TO_CHAR(DATE,'FROMAT_MODELS')
+
+ 
+Format Models :
+
+ 1.  YEAR : TWENTYTWENTY  
+ 2. YYYY : 2020
+ 3. YY : 20
+ 4. MONTH : JULY
+ 5. MON : JUL
+ 6. MM : 07
+ 7. DAY : WEDNESDAY
+ 8. DY : WED
+ 9. DD : 08
+ 10. D : 4 ( day of the week )
+ 11. HH24 : 17 hours
+ 12. HH12 : 5 hours
+ 13. MI : 22 minutes
+ 14. SS : 53 seconds
+ 15. 'HH12:MI:SS'    : 5 : 22 : 53
+ 16. 'DD-MM-YY'    : 17 - 05 - 20
+ 17. 'MM-DD-YYYY'    : 05 - 17 - 2020
+
+
+
+EXAMPLE :
+  1.WAQTD DETAILS OF THE EMPLOYEE WHO WAS HIRED ON A SUNDAY 
+        SELECT TO_CHAR(HIREDATE, 'DAY') 
+        FROM EMP;
+   
+  2. WAUQTD DETAILS OF AN EMPLOYEE HIRED ON MONDAY AT 3PM
+          SELECT *
+          FROM EMP
+          WHERE TO_CHAR(HIREDATE,'DAY')='MONDAY' AND 
+          TO_CHAR(HIREDATE,'HH12')=3;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+16.  NVL( ) : [ NULL VALUE LOGIC ] " It is used to eliminate the side effects of using null in arithmetic operations " . 
+        SYNTAX: NVL(ARGUMENT1,ARGUMENT 2)
+
+     Argument 1 : Here write any column / exp which can result In null .
+     Argument 2 : Here we write a numeric value which will be substituted if argument 1 results in Null , If argument 1 is NOT NULL then the                                  same value will be considered .
+
+     EXAMPLE:     SELECT ENAME,SAL+NVL(COMM,0)
+                  FROM EMP;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+17. NVL2() : The NVL2() function checks if the first argument is NULL. 
+              If it is not NULL, it returns the second argument; otherwise, it returns the third argument.
+     SYNTAX: NVL2 ( ARG1 , ARG2 , ARG3 )
+          
+      EXAMPLE:     SELECT NVL2(5, 10*2, 100) AS result
+                   FROM dual;                               O/P = 20
+
+      EXAMPLE:    SELECT NVL2(NULL , 10*2 , 100)
+                  FROM DUAL;                                O/P = 100
+   
+      EXAMPLE:    SELECT NVL2(NULL, NULL, 10*2)
+                  FROM DUAL;                                O/P = 20
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+18.  ASCII(): IT IS USED TO DETERMINE THE ASCII VALUES FOR THE SPECIFIC CHARACTER.
+        SYNTAX:  ASCII(STRING)
+   
+   EXAMPLE :  SELECT ENAME, ASCII(ENAME)
+              FROM EMP;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+19.  POWER(): IT IS USED TO GET THE VALUES OF A NUMBER RAISED TO THE POWER OF ANOTHER NUMBER.
+         SYNTAX:   POWER(A , B )         
+                                               A: BASE VALUE
+                                               B: EXPONENT
+
+      EXAMPLE:   SELECT POWER(2,2) 
+                 FROM DUAL;                O/P = 4
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+20.  SQRT(): IT IS USED TO GET THE SQUARE ROOT OF A NUMBER.
+         SYNTAX: SQRT(NUMBER)
+     
+      EXAMPLE:  SELECT SQRT(100)
+                FROM DUAL;                 O/P = 10
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+21.  SIN(): IT IS USED TO GET THE SINE OF A NUMBER.
+       SYNTAX: SIN(NUMBER)
+
+     EXAMPLE: SELECT SIN(10)
+               FROM DUAL;                 O/P = -.54402111
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+22. TAN(): IT IS USED TO GET THE TANGENT OF A NUMBER.
+         SYNTAX: TAN(NUMBER)
+
+     EXAMPLE: SELECT TAN(10) 
+              FROM DUAL;                  O/P = .648360827
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+23.TRIM():  It is used to remove unwanted spaces or specific characters from the beginning (leading) or end (trailing) of a string.
+
+ SYNTAX: TRIM( LEADING/TRAILING/BOTH 'CHAR' FROM 'string')
+
+      MAIL_ID :   ROHANSINGHROO@GMAIL.COM  
+ 
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+23. RANK() : Rank function is used to Assigns a rank to each row.
+             If the same rank is available rank function it will creates gap or skips the ranks 
+
+	SYNTAX:  RANK() OVER ( [PARTITION BY COL_NAME/EXP ]
+                               ORDER BY COL_NAME [ASC]/DESC)
+
+EXAMPLE:   SELECT ENAME, RANK() OVER (ORDER BY SAL DESC)
+           FROM EMP;
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+24. DENSE_RANK() : DENSE_RANK function is used to Assigns a rank to each row.
+                   If the same rank is available DENSE_RANK function it will not creates gaps or skips the ranks
+
+
+SYNTAX: DENSE_RANK() OVER ( [PARTITION BY COL_NAME/EXP ]
+                               ORDER BY COL_NAME [ASC]/DESC)
+
+EXAMPLE:  SELECT ENAME, DENSE_RANK() OVER(SELECT DESC)
+          FROM EMP;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+25. COALESCE() : It is used to return the first non-NULL value from a list of expressions.
+      SYNTAX :  COALESCE ( ARG1 , ARG2 , ARG3...... ) 
+
+ EXAMPLE :   SELECT COMM, SAL, COALESCE(COMM , SAL , 0) AS RESULT 
+             FROM EMP;
+ 
+ EXAMPLE :   SELECT COALESCE(NULL, 50, 100) AS result 
+             FROM dual;                                             O/P = 50
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+26.    NULLIF(): It is used to compare two expressions and return NULL if they are equal, otherwise it returns the first expression.
+        SYNTAX: NULLIF ( ARG1 , ARG2 )
+
+EXAMPLE:    SELECT NULLIF(10, 10) AS RESULT
+            FROM DUAL;                             O/P = NULL
+
+EXAMPLE:    SELECT NULLIF(10,2) AS RESULT
+            FROM DUAL;                             O/P = 10
+
+EXAMPLE:   SELECT NULLIF(COMM,NULL) AS RESULT
+           FROM EMP; 
+                             
+------------------------------------------------------------------------------------------------------------------------------------------------
+27.    IFNULL(): It is used to return a specified value if the given expression is NULL, otherwise it returns the expression itself.
+         SYNTAX:      IFNULL ( ARG1 , ARG2 )
+
+EXAMPLE:   SELECT IFNULL(NULL, 'No Value') AS RESULT
+           FROM DUAL;                                         O/P = NO VALUE
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+28. CASE() :
+
+	SYNTAX: CASE WHEN condition_1 THEN 'result_1'
+		     WHEN condition_2 THEN 'result_2'
+			.
+			.
+			.
+		     WHEN condition_N THEN 'result_N'
+		     [ELSE 'default_result'] 
+		     END
+
+
+   EXAMPLE:      SELECT ENAME,
+                        CASE
+                        WHEN COMM IS NULL THEN 'No Commission'
+                        WHEN COMM = 0 THEN 'Zero Commission'
+                        ELSE 'Has Commission'
+                        END AS Commission_Status
+                        FROM EMP;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+29. EXTRACT(): It is used to retrieve a specific part (like year, month, day, hour, etc.) from a date, timestamp, or interval value.
+        SYNTAX: EXTRACT( DAY / MONTH / YEAR  from  DATE )
+
+
+ EXAMPLE:      SELECT EXTRACT(YEAR FROM DATE '2025-08-15') AS YEAR_PART,
+               EXTRACT(MONTH FROM DATE '2025-08-15') AS MONTH_PART,
+               EXTRACT(DAY FROM DATE '2025-08-15') AS DAY_PART
+               FROM dual;
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+30. ADD_MONTHS(): It is used to add or subtract a specified number of months from a given date.
+      SYNTAX: ADD_MONTHS( DATE , NO_OF_MONTHS )
+
+
+
+EXAMPLE:1.  WAQTD DETAILS OF THE EMPLOYEE HIRED AFTER TWO YEARS OF THE FIRST EMPLOYEE.
+                 SELECT *
+                 FROM EMP
+                 WHERE HIREDATE > ADD_MONTHS(
+                 (SELECT MIN(HIREDATE) FROM EMP), 24);
+
+
+EXAMPLE:2.  WAQTD DETAILS OF THE EMPLOYEE HIRED BEFORE THREE YEARS OF THE LAST EMPLOYEE.
+                 SELECT *
+                 FROM EMP
+                 WHERE HIREDATE < ADD_MONTHS((SELECT MAX(HIREDATE) FROM EMP), -36);
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+ASSIGNEMT
+ 
+1.List employees whose name having 4 characters
+      SELECT ENAME
+      FROM EMP
+      WHERE LENGTH(ENAME)=4;
+
+2.List employees whose job is having 7 characters
+      SELECT ENAME, JOB
+      FROM EMP
+      WHERE LENGTH(JOB)=7;
+
+3.Find out how many times letter 'S' occurs in 'qspiders'
+      SELECT LENGTH('qspiders') - LENGTH(REPLACE('qspiders', 's'))
+      FROM DUAL;
+
+4.List the employees whose job is having last 3 characters as 'man'
+      SELECT ENAME, JOB
+      FROM EMP
+      WHERE SUBSTR(JOB,-3) = 'MAN';
+
+5.List employees whose job is having first 3 characters as 'man'. 
+      SELECT ENAME,JOB 
+      FROM EMP
+      WHERE SUBSTR(JOB,1,3) = 'MAN';
+
+6.Display all the names whose name is having exactly 1 'L'.
+      SELECT ENAME
+      FROM EMP
+      WHERE LENGTH(ENAME) - LENGTH(REPLACE(ENAME,'L','')) = 1;
+
+7.Display dept names which are having letter 'O'.
+       SELECT DNAME
+       FROM DEPT 
+       WHERE INSTR(DNAME,'O',1) = 1 ;
+  
+        OR 
+        
+       SELECT DNAME
+       FROM DEPT
+       WHERE DNAME LIKE '%O%' ;
+
+
+8.Calculate number of L in string 'HELLLLL'.
+        SELECT LENGTH('HELLLLL') - LENGTH(REPLACE('HELLLLL','L'))
+        FROM DUAL;
+
+9.Display all the employees whose job has a string 'MAN'
+        SELECT *
+        FROM EMP
+        WHERE JOB LIKE '%MAN%' ;
+
+
+10.Display first 3 characters of Ename in lower case and rest everything in upper case. If Ename is 'QSPIDERS' then display this as ‘qspIDERS’
+         SELECT LOWER(SUBSTR('QSPIDERS',1,3)) || UPPER(SUBSTR('QSPIDERS',LENGTH('QSPIDERS')/2+1))
+         FROM DUAL;
+
+
+11.Display the result from emp table as below. 
+   SMITH is a CLERK and gets salary 2000 Here SMITH is ename column, 
+   CLERK is JOB and 2000 is SAL column and rest everything is literal strings.
+    	SELECT ename || ' is a ' || job || ' and gets salary ' || sal AS details
+    	FROM emp;
+
+12. List the employees hired on a Wednesday.
+       SELECT ENAME, HIREDATE
+       FROM EMP 
+       WHERE TO_CHAR(HIREDATE,'DAY') = 'WEDNESDAY' ;
+
+13. List the employees hired on a leap year
+        SELECT ENAME, HIREDATE
+        FROM EMP
+        WHERE ( MOD(TO_CHAR(HIREDATE,'YYYY'), 4) = 0 AND  MOD(TO_CHAR(HIREDATE,'YYYY'), 100) !=0 ) OR MOD(TO_CHAR(HIREDATE,'YYYY'), 400) = 0; 
+
+14. List the employees hired on a Sunday in the month of may.
+        SELECT ENAME,HIREDATE
+        FROM EMP
+        WHERE TO_CHAR(HIREDATE,'DAY')= 'SUNDAY' AND TO_CHAR(HIREDATE,'MONTH')='MAY' ;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+   
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+   
+     
+ 
+ 
+
+
+
+
+
+  
+           
+
+
+        
+
+
+ 
+
+
+
+
+        
+        
+       
+
+
